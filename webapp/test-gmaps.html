@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      var marker ;
+      var dsvag = {lat: 47.381090 , lng: 8.541850 };
+      var iconBase = './assets/';
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: dsvag,
+          zoom: 18
+        });
+        /*
+        marker = new google.maps.Marker({
+          position: dsvag,
+          map: map
+        });
+        */
+        var icons = {
+          pu800: {
+            icon: iconBase + 'pu-01.png' //'taxo-800.png'
+
+          }
+        }
+        var features = [
+          {
+              position: new google.maps.LatLng(47.381090, 8.541850),
+              type: 'pu800',
+              title: 'Nest von DSV AG'
+            },
+          {
+            position: new google.maps.LatLng(47.381090, 8.544),
+            type: 'pu800',
+            title: '1'
+          },
+          {
+              position: new google.maps.LatLng(47.381090, 8.540),
+              type: 'pu800',
+              title: '2'
+            },
+          {
+              position: new google.maps.LatLng(47.381090, 8.543),
+              type: 'pu800',
+              title: '3'
+          } ,
+          {
+              position: new google.maps.LatLng(47.381590, 8.541850),
+              type: 'pu800',
+              title: '4'
+          },
+          {
+              position: new google.maps.LatLng(47.380590, 8.541850),
+              type: 'pu800',
+              title: '5'
+          }
+      ]
+        // Create markers.
+        features.forEach(function(feature) {
+          marker = new google.maps.Marker({
+            position: feature.position,
+            icon: { url: icons[feature.type].icon ,
+                    size: new google.maps.Size(24, 41),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(0, 41)
+                  },
+            title: "typ ist " + feature.type + " | id ist " + feature.title,
+            map: map
+          });
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfN6EL1wX3RLi1-yorziGki9yMw1lgFG0&callback=initMap"
+    async defer></script>
+  </body>
+</html>
